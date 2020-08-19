@@ -1,0 +1,225 @@
+type Query {
+	user(query: String): [User]!
+	me: User!
+	profile(query: String): [Profile!]!
+	trip(query: String): [Trip!]!
+	myTrips: [Trip!]!
+	river(query: String): [River!]!
+	tackle(query: String): [Tackle!]!
+	myTackle: [Tackle!]!
+	fish(query: String): [Fish!]!
+	flies(query: String): [Flies!]!
+}
+
+type Mutation {
+	signup(data: SignupInput!): SignupPayload!
+	login(data: LoginInput!): LoginPayload!
+	update_user(data: UpdateUserInput!): User!
+	delete_user: User!
+	create_profile(data: CreateProfileInput!): Profile!
+	update_profile(data: UpdateProfileInput!): Profile!
+	delete_profile: Profile!
+	create_trip(data: CreateTripInput!): Trip!
+	update_trip(data: UpdateTripInput!, id: ID!): Trip!
+	delete_trip(id: ID!): Trip!
+	create_river(data: CreateRiverInput!): River!
+	update_river(data: UpdateRiverInput!, id: ID!): River!
+	delete_river(id: ID!): River!
+	create_tackle(data: CreateTackleInput!): Tackle!
+	update_tackle(data: UpdateTackleInput!, id: ID!): Tackle!
+	delete_tackle(id: ID!): Tackle!
+	create_fish(data: CreateFishInput!): Fish!
+	update_fish(data: UpdateFishInput!, id: ID!): Fish!
+	delete_fish(id: ID!): Fish!
+	create_fly(data: CreateFlyInput!): Flies!
+	update_fly(data: UpdateFlyInput!, id: ID!): Flies!
+	delete_fly(id: ID!): Flies!
+}
+
+input SignupInput {
+	name: String!
+	email: String!
+	password: String!
+}
+
+type SignupPayload {
+	id: String!
+	name: String!
+	email: String!
+}
+
+input LoginInput {
+	email: String!
+	password: String!
+}
+
+type LoginPayload {
+	token: String!
+	user: User!
+}
+
+input UpdateUserInput {
+	name: String
+	email: String
+	password: String
+}
+
+input CreateProfileInput {
+	bio: String
+	location: String
+}
+
+input UpdateProfileInput {
+	bio: String
+	location: String
+}
+
+input CreateTripInput {
+	date: String!
+	time_spent: Float
+	amount_caught: String
+	average_size: String
+	largest_size: String
+	fish: [Int!]
+	flies: [Int!]!
+	river: Int!
+	tackle: [Int!]!
+}
+
+input UpdateTripInput {
+	date: String
+	time_spent: Float
+	amount_caught: String
+	average_size: String
+	largest_size: String
+	fish: [Int!]
+	flies: [Int!]
+	river: Int
+	tackle: [Int!]
+}
+
+input CreateRiverInput {
+	name: String!
+	latitude: String!
+	longitude: String!
+	brush: String
+	size: String!
+	regulation: String!
+	stocked: Boolean!
+	fish: [Int!]
+	flies: [Int!]
+}
+
+input UpdateRiverInput {
+	name: String
+	latitude: String
+	longitude: String
+	brush: String
+	size: String
+	regulation: String
+	stocked: Boolean
+	fish: [Int!]
+	flies: [Int!]
+}
+
+input CreateTackleInput {
+	rod_name: String!
+	rod_weight: String!
+	rod_length_ft: String!
+	rod_length_in: String!
+}
+
+input UpdateTackleInput {
+	rod_name: String
+	rod_weight: String
+	rod_length_ft: String
+	rod_length_in: String
+}
+
+input CreateFishInput {
+	species: String!
+}
+
+input UpdateFishInput {
+	species: String
+}
+
+input CreateFlyInput {
+	type: String!
+	name: String!
+	color: String!
+}
+
+input UpdateFlyInput {
+	type: String
+	name: String
+	color: String
+}
+
+type User {
+	id: ID!
+	name: String!
+	email: String!
+	password: String
+	profile: Profile
+	trips: [Trip!]
+	tackle: [Tackle!]
+}
+
+type Profile {
+	id: ID!
+	bio: String!
+	location: String
+	author: User!
+}
+
+type Trip {
+	id: ID!
+	date: String!
+	time_spent: Float
+	amount_caught: String
+	average_size: String
+	largest_size: String
+	fish: [Fish!]!
+	flies: [Flies!]!
+	river: River!
+	tackle: [Tackle!]!
+	author: User!
+}
+
+type River {
+	id: ID!
+	name: String!
+	latitude: String!
+	longitude: String!
+	brush: String
+	size: String!
+	regulation: String!
+	stocked: Boolean!
+	fish: [Fish!]!
+	flies: [Flies!]!
+}
+
+type Tackle {
+	id: ID!
+	rod_name: String!
+	rod_weight: String!
+	rod_length_ft: String!
+	rod_length_in: String!
+	trip: [Trip!]!
+	author: User!
+}
+
+type Fish {
+	id: ID!
+	species: String!
+	rivers: [River!]!
+}
+
+type Flies {
+	id: ID!
+	type: String!
+	name: String!
+	color: String!
+	rivers: [River!]!
+}

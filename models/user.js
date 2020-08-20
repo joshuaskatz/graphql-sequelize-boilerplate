@@ -21,14 +21,6 @@ module.exports = (sequelize, Sequelize) => {
 		User.hasOne(models.Profile, {
 			foreignKey: 'userId'
 		});
-		User.hasMany(models.Tackle, {
-			foreignKey: 'userId',
-			as: 'tackle'
-		});
-		User.hasMany(models.Trip, {
-			foreignKey: 'userId',
-			as: 'trip'
-		});
 	};
 
 	return User;

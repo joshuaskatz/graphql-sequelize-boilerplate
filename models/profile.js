@@ -1,5 +1,3 @@
-const { modifyObjectFields } = require('graphql-tools');
-
 module.exports = (sequelize, Sequelize) => {
 	const { DataTypes } = Sequelize;
 

@@ -1,5 +1,5 @@
 export const Profile = {
-	author: async (parent, args, { models }) => {
-		return models.User.findByPk(parent.userId);
+	author: async (parent, args, { loaders }) => {
+		return loaders.users.load(parent.userId);
 	}
 };

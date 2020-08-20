@@ -1,11 +1,11 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import bodyparser from 'body-parser';
-import cors from 'cors';
 import { importSchema } from 'graphql-import';
 
 import models from '../models';
 import resolvers from './resolvers';
+import { loaders } from './loaders/index';
 
 const typeDefs = importSchema('./src/schema.graphql');
 
@@ -17,7 +17,8 @@ const server = new ApolloServer({
 	context: async ({ req }) => {
 		return {
 			models,
-			request: req
+			request: req,
+			loaders
 		};
 	}
 });
@@ -31,7 +32,7 @@ server.applyMiddleware({
 });
 
 models.sequelize.sync().then(() => {
-	app.listen({ port: 4000 }, () =>
-		console.log(`Server live at http://localhost:4000${server.graphqlPath}`)
+	app.listen({ port: 8080 }, () =>
+		console.log(`Server live at http://localhost:8080${server.graphqlPath}`)
 	);
 });

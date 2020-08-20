@@ -1,13 +1,6 @@
 import Sequelize from 'sequelize';
 import path from 'path';
 
-const config = {
-	define: {
-		createdAt: 'createdat',
-		updatedAt: 'updatedat'
-	} /*don't forget to add host, port, dialect, etc.*/
-};
-
 const sequelize = new Sequelize(process.env.DATABASE_URI, {
 	dialect: 'postgres',
 	protocol: 'postgres',

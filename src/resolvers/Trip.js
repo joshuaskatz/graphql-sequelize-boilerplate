@@ -1,44 +1,28 @@
 export const Trip = {
-	author: async (parent, args, { models }) => {
-		return models.User.findByPk(parent.userId);
+	author: async (parent, args, { loaders }) => {
+		const usersPromise = await loaders.users.load(parent.userId);
+
+		return usersPromise;
 	},
-	river: async (parent, args, { models }) => {
-		return models.River.findByPk(parent.riverId);
+	river: async (parent, args, { loaders }) => {
+		return loaders.river.load(parent.riverId);
 	},
 	fish: async (parent, args, { models }) => {
-		const tripFishPromise = models.TripFish.findAll({
-			attributes: [ 'fishId' ],
-			where: { tripId: parent.id }
-		});
-
-		const [ fish ] = await Promise.all([ tripFishPromise ]);
-
-		return fish.map(async ({ fishId }) => {
-			return models.Fish.findOne({ where: { id: fishId } });
+		return models.Fish.findAll({
+			include: [ { model: models.Trip, where: { id: parent.id } } ],
+			through: { attributes: [] }
 		});
 	},
 	flies: async (parent, args, { models }) => {
-		const tripFlyPromise = models.TripFly.findAll({
-			attributes: [ 'flyId' ],
-			where: { tripId: parent.id }
-		});
-
-		const [ flies ] = await Promise.all([ tripFlyPromise ]);
-
-		return flies.map(async ({ flyId }) => {
-			return models.Fly.findOne({ where: { id: flyId } });
+		return models.Fly.findAll({
+			include: [ { model: models.Trip, where: { id: parent.id } } ],
+			through: { attributes: [] }
 		});
 	},
 	tackle: async (parent, args, { models }) => {
-		const tripTacklePromise = models.TripTackle.findAll({
-			attributes: [ 'tackleId' ],
-			where: { tripId: parent.id }
-		});
-
-		const [ tackle ] = await Promise.all([ tripTacklePromise ]);
-
-		return tackle.map(({ tackleId }) => {
-			return models.Tackle.findOne({ where: { id: tackleId } });
+		return models.Tackle.findAll({
+			include: [ { model: models.Trip, where: { id: parent.id } } ],
+			through: { attributes: [] }
 		});
 	}
 };

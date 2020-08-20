@@ -193,11 +193,11 @@ type River {
 	latitude: String!
 	longitude: String!
 	brush: String
-	size: String!
+	size: String
 	regulation: String!
-	stocked: Boolean!
-	fish: [Fish!]!
-	flies: [Flies!]!
+	stocked: Boolean
+	fish: [Fish!]
+	flies: [Flies!]
 }
 
 type Tackle {
@@ -213,7 +213,6 @@ type Tackle {
 type Fish {
 	id: ID!
 	species: String!
-	rivers: [River!]!
 }
 
 type Flies {
@@ -221,5 +220,4 @@ type Flies {
 	type: String!
 	name: String!
 	color: String!
-	rivers: [River!]!
 }

@@ -30,13 +30,7 @@ export const Query = {
 		return models.Trip.findAll({ where: { userId } });
 	},
 	user: async (parent, args, { models }) => {
-		return models.User.findAll({
-			include: [
-				{ model: models.Profile, attributes: [ 'userId' ] },
-				{ model: models.Trip, attributes: [ 'userId' ] },
-				{ model: models.Tackle, attributes: [ 'userId' ] }
-			]
-		});
+		return models.User.findAll();
 	},
 	me: async (parent, args, { models, request }) => {
 		const id = getUserId(request);

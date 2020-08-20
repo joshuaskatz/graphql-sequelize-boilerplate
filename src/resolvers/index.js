@@ -5,8 +5,6 @@ import { Profile } from './Profile';
 import { Trip } from './Trip';
 import { Tackle } from './Tackle';
 import { River } from './River';
-import { Fish } from './Fish';
-import { Flies } from './Flies';
 
 const resolvers = {
 	Query,
@@ -15,9 +13,7 @@ const resolvers = {
 	Profile,
 	Trip,
 	Tackle,
-	River,
-	Fish,
-	Flies
+	River
 };
 
 export default resolvers;

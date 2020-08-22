@@ -1,3 +1,6 @@
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { PubSub } from 'graphql-subscriptions';
@@ -5,7 +8,7 @@ import { createServer } from 'http';
 import bodyparser from 'body-parser';
 import { importSchema } from 'graphql-import';
 
-import models from '../models';
+import models from './models';
 import resolvers from './resolvers';
 import { loaders } from './loaders/index';
 

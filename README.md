@@ -13,7 +13,7 @@ github repository for in depth documentation!
 
 Websockets is already set up, so all you have to do is create your typeDefs and resolvers for your subscriptions!
 
-Use 'npm start' to to start your development server! Go to 
+Use 'npm run dev' to to start your development server! Go to 
 http://localhost:8080/graphql/ to play around in the GraphQL playground and 
 to test out your queries, mutations, and subscriptions! 
 
